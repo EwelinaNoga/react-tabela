@@ -1,19 +1,29 @@
 import React from 'react';
+'use strict';
 
 class Tab extends React.Component {
-    'use strict';
+   
   constructor(props) {
     super(props);
     this.state = {
       records: [
         {
-          taskName: "February, 2018",
-          priority: 10000,
+          taskName: "xxxxxxxxxxxxxxx",
+            month: "zzzzzzzzzzzzz",
+            priority: "Medium",
           done: 3000,
         },
         {
-          taskName: "January, 2018",
-          priority: 11000,
+          taskName: "yyyyyyyyyyyyy",
+            month: "zzzzzzzzzzzzz",
+            priority: "Medium",
+          done: 2000,
+
+        },
+        {
+          taskName: "zzzzzzzzzzzzz",
+          month: "zzzzzzzzzzzzz",
+          priority: "Low",
           done: 2000,
         }
       ],
@@ -42,15 +52,15 @@ class Tab extends React.Component {
   renderRow() {
     const { records } = this.state;
     if (records) {
+      var appendDetails = this.state.appendDetails;
       return records.map((record, i) => {
-        if (!this.state.appendDetails) {
+        if (!appendDetails) {
           if (record.month) {
             return (
               <tr key={++i}>
-                <td>{record.month}</td>
-                <td>{record.grossAmount}</td>
-                <td>{record.paidToDate}</td>
-                <td>{record.balance}</td>
+                <td>{record.taskName}</td>
+                <td>{record.priority}</td>
+                <td>{record.done}</td>
                 <td
                   className="btn btn-link"
                   onClick={() => this.renderDetails(record.month)}
@@ -71,11 +81,11 @@ class Tab extends React.Component {
     }
   }
 
-  renderDetails(month) {
+  renderDetails(taskName) {
     this.records = this.state.records;
 
     var remain = this.records.filter(record => {
-      return record.month === month;
+      return record.taskName === taskName;
     });
 
     this.setState({ appendDetails: true });
@@ -93,7 +103,7 @@ class Tab extends React.Component {
           <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div className="row">
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div className="text-left">{record.month}</div>
+                <div className="text-left">{record.taskName}</div>
               </div>
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div className="text-right">
@@ -128,6 +138,7 @@ class Tab extends React.Component {
     return <div>{this.renderTable()}</div>;
   }
 }
+
 
 
 //const Tab = () => (
